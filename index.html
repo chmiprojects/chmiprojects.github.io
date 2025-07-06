@@ -7,22 +7,23 @@
   <button onclick="logClick()">Click to Log Time</button>
   <p id="status"></p>
 
-  <script>
-    async function logClick() {
-      try {
-        const response = await fetch('https://script.google.com/macros/s/AKfycbypqTmKm1QrWAG0JhrNifHOGHGvpbA8QeIpBVG6xyQ9dPKblqAXf_jrWTftBF_lQR0_QA/exec', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({})  // dummy body
-        });
+<script>
+  async function logClick() {
+    try {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbypqTmKm1QrWAG0JhrNifHOGHGvpbA8QeIpBVG6xyQ9dPKblqAXf_jrWTftBF_lQR0_QA/exec', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({})
+      });
 
-        const text = await response.text();
-        document.getElementById("status").innerText = text;
-      } catch (err) {
-        console.error(err);
-        document.getElementById("status").innerText = "❌ Failed to log click.";
-      }
+      const text = await response.text();
+      document.getElementById("status").innerText = text;
+    } catch (err) {
+      console.error(err);
+      document.getElementById("status").innerText = "❌ Failed to log click.";
     }
-  </script>
+  }
+</script>
+
 </body>
 </html>
