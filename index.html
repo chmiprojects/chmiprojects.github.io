@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Submit Form</title>
+  <meta charset="UTF-8" />
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: auto; padding: 20px; }
+    input, textarea { width: 100%; margin-bottom: 10px; padding: 8px; }
+    button { padding: 10px 20px; }
+  </style>
+</head>
+<body>
+  <h2>Submit Details</h2>
+  <form id="myForm">
+    <input type="text" name="name" placeholder="Your Name" required />
+    <input type="email" name="email" placeholder="Your Email" required />
+    <textarea name="message" placeholder="Your Message" required></textarea>
+    <button type="submit">Submit</button>
+  </form>
+  <p id="response"></p>
+
+  <script>
+    const form = document.getElementById('myForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const data = {
+        name: form.name.value,
+        email: form.email.value,
+        message: form.message.value
+      };
+
+      const response = await fetch('YOUR_GOOGLE_SCRIPT_WEB_APP_URL', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.text();
+      document.getElementById('response').innerText = result;
+      form.reset();
+    });
+  </script>
+</body>
+</html>
