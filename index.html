@@ -2,26 +2,26 @@
 <html>
 <head>
   <title>Click Logger</title>
-  <meta charset="UTF-8" />
-  <style>
-    body { font-family: Arial, text-align: center; padding: 40px; }
-    button { padding: 12px 24px; font-size: 18px; }
-    p { margin-top: 20px; }
-  </style>
 </head>
 <body>
-  <h2>Log Time Click</h2>
   <button onclick="logClick()">Click to Log Time</button>
   <p id="status"></p>
 
   <script>
     async function logClick() {
-      const response = await fetch('https://script.google.com/macros/s/AKfycbypqTmKm1QrWAG0JhrNifHOGHGvpbA8QeIpBVG6xyQ9dPKblqAXf_jrWTftBF_lQR0_QA/exec', {
-        method: 'POST'
-      });
+      try {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbypqTmKm1QrWAG0JhrNifHOGHGvpbA8QeIpBVG6xyQ9dPKblqAXf_jrWTftBF_lQR0_QA/exec', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({})  // dummy body
+        });
 
-      const text = await response.text();
-      document.getElementById("status").innerText = text;
+        const text = await response.text();
+        document.getElementById("status").innerText = text;
+      } catch (err) {
+        console.error(err);
+        document.getElementById("status").innerText = "❌ Failed to log click.";
+      }
     }
   </script>
 </body>
